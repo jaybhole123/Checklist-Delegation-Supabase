@@ -102,7 +102,7 @@ const UserLayout = ({ children }) => {
             to={isAdmin ? "/admin/dashboard" : "/user/dashboard"}
             className="flex items-center gap-2 font-semibold text-green-700 dark:text-green-300"
           >
-            <span>TaskDesk</span>
+            <span>Checklist & Delegation</span>
           </Link>
         </div>
         <nav className="flex-1 overflow-y-auto p-2">
@@ -179,7 +179,7 @@ const UserLayout = ({ children }) => {
             className="flex items-center gap-2 font-semibold text-green-700 dark:text-green-300"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <span>TaskDesk</span>
+            <span>Checklist & Delegation</span>
           </Link>
         </div>
         <nav className="flex-1 overflow-y-auto p-2 bg-white dark:bg-gray-950">

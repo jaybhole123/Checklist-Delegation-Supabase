@@ -192,8 +192,8 @@ const MaintenanceTaskCard = ({
                             name="givenBy"
                             value={task.givenBy}
                             onChange={handleChange}
-                            disabled={(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin"))}
-                            className={`w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-gray-50 focus:bg-white transition-all text-sm ${(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin")) ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            disabled={localStorage.getItem("role")?.toUpperCase() === "HOD"}
+                            className={`w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-gray-50 focus:bg-white transition-all text-sm ${localStorage.getItem("role")?.toUpperCase() === "HOD" ? 'opacity-70 cursor-not-allowed' : ''}`}
                         >
                             <option value="">Select Assign From</option>
                             {givenBy.map((g, i) => { const val = typeof g === 'object' ? (g.given_by || g.name) : g; return <option key={i} value={val}>{val}</option>; })}

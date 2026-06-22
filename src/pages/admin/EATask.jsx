@@ -7,6 +7,7 @@ import AudioPlayer from "../../components/AudioPlayer";
 import supabase from "../../SupabaseClient";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../../redux/slice/settingSlice";
+import { uniqueGivenByData } from "../../redux/slice/assignTaskSlice";
 import CalendarComponent from "../../components/CalendarComponent";
 import { sendTaskAssignmentNotification } from "../../services/whatsappService";
 import { useMagicToast } from "../../context/MagicToastContext";
@@ -41,7 +42,7 @@ const defaultTask = () => ({
 });
 
 // Single Task Card Component
-function TaskCard({ task, index, total, allDoers, onUpdate, onRemove }) {
+function TaskCard({ task, index, total, allDoers, givenBy, onUpdate, onRemove }) {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         onUpdate(task.id, { [name]: value });
@@ -135,15 +136,19 @@ function TaskCard({ task, index, total, allDoers, onUpdate, onRemove }) {
                 {/* Assign From */}
                 <div>
                     <label className="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Assign From (Given By) <span className="text-red-500">*</span></label>
-                    <input
-                        type="text"
+                    <select
                         name="given_by"
                         value={task.given_by}
                         onChange={(e) => onUpdate(task.id, { given_by: e.target.value })}
-                        disabled={(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin"))}
-                        className={`w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-gray-50 focus:bg-white transition-all text-sm ${(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin")) ? 'opacity-70 cursor-not-allowed' : ''}`}
-                        placeholder="Enter assigner name"
-                    />
+                        disabled={localStorage.getItem("role")?.toUpperCase() === "HOD"}
+                        className={`w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-gray-50 focus:bg-white transition-all text-sm ${localStorage.getItem("role")?.toUpperCase() === "HOD" ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    >
+                        <option value="">Select Assign From</option>
+                        {givenBy && givenBy.map((g, i) => {
+                            const val = typeof g === 'object' ? (g.given_by || g.name) : g;
+                            return <option key={i} value={val}>{val}</option>;
+                        })}
+                    </select>
                 </div>
 
                 {/* Doer Name with Autocomplete */}
@@ -342,6 +347,7 @@ export default function EATask() {
     const dispatch = useDispatch();
     const { showToast } = useMagicToast();
     const { userData } = useSelector((state) => state.setting || {});
+    const { givenBy } = useSelector((state) => state.assignTask);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [tasks, setTasks] = useState([defaultTask()]);
@@ -357,6 +363,7 @@ export default function EATask() {
         fetchHolidays();
         fetchUniqueDoers();
         dispatch(userDetails());
+        dispatch(uniqueGivenByData());
 
         // Handle URL parameters for pre-filling
         const params = new URLSearchParams(window.location.search);
@@ -601,6 +608,7 @@ export default function EATask() {
                             index={index}
                             total={tasks.length}
                             allDoers={allDoers}
+                            givenBy={givenBy}
                             onUpdate={updateTask}
                             onRemove={removeTask}
                         />

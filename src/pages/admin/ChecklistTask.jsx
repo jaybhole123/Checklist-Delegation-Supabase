@@ -165,8 +165,8 @@ function TaskCard({ task, index, total, department, doerName, givenBy, dispatch,
                             name="givenBy"
                             value={task.givenBy}
                             onChange={handleChange}
-                            disabled={(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin"))}
-                            className={`w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all text-sm ${(localStorage.getItem("role")?.toUpperCase() === "HOD" || (localStorage.getItem("role")?.toLowerCase() === "admin" && localStorage.getItem("user-name")?.toLowerCase() !== "admin")) ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            disabled={localStorage.getItem("role")?.toUpperCase() === "HOD"}
+                            className={`w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition-all text-sm ${localStorage.getItem("role")?.toUpperCase() === "HOD" ? 'opacity-70 cursor-not-allowed' : ''}`}
                         >
                             <option value="">Select Assign From</option>
                             {givenBy.map((g, i) => <option key={i} value={g}>{g}</option>)}
