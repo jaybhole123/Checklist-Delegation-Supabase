@@ -1094,7 +1094,7 @@ function DelegationDataPage() {
           <div class="watermark-overlay"></div>
           <div class="header">
             <div class="brand-block">
-              <img src="${logo}" class="brand-logo-img" />
+              <img src="/logo.png" class="brand-logo-img" />
             </div>
             <div class="report-title-container">
               <h1 class="report-main-title">Overdue Delegation Report</h1>
