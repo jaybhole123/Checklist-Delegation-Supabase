@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNotifications } from "../../redux/slice/notificationSlice";
 import supabase from "../../SupabaseClient";
+import jbtLogo from "../../assets/jbt.png";
 import {
   CheckSquare,
   ClipboardList,
@@ -344,12 +345,15 @@ export default function AdminLayout({ children, darkMode, toggleDarkMode, showLa
     >
       {/* Sidebar for desktop */}
       <aside className="hidden w-64 flex-shrink-0 border-r border-blue-200 bg-white md:flex md:flex-col">
-        <div className="flex h-14 items-center border-b border-blue-200 px-4 bg-gradient-to-r from-blue-100 to-purple-100">
+        <div className="flex h-16 items-center border-b border-blue-100/80 px-4 bg-gradient-to-r from-blue-50/50 to-purple-50/50">
           <Link
             to="/dashboard/admin"
-            className="flex items-center gap-2 font-semibold text-blue-700"
+            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
           >
-            <span>Checklist & Delegation</span>
+            <img src={jbtLogo} alt="JBT Logo" className="h-9 w-auto object-contain rounded-lg border border-gray-200/60 bg-white p-1 shadow-sm shrink-0" />
+            <span className="text-sm font-black tracking-tight leading-tight bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent">
+              Checklist &<br />Delegation
+            </span>
           </Link>
         </div>
         <nav className="flex-1 overflow-y-auto p-2">
@@ -533,13 +537,16 @@ export default function AdminLayout({ children, darkMode, toggleDarkMode, showLa
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
           <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg">
-            <div className="flex h-14 items-center border-b border-blue-200 px-4 bg-gradient-to-r from-blue-100 to-purple-100">
+            <div className="flex h-16 items-center border-b border-blue-100/80 px-4 bg-gradient-to-r from-blue-50/50 to-purple-50/50">
               <Link
                 to="/dashboard/admin"
-                className="flex items-center gap-2 font-semibold text-blue-700"
+                className="flex items-center gap-3 hover:opacity-90 transition-opacity"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span>Checklist & Delegation</span>
+                <img src={jbtLogo} alt="JBT Logo" className="h-9 w-auto object-contain rounded-lg border border-gray-200/60 bg-white p-1 shadow-sm shrink-0" />
+                <span className="text-sm font-black tracking-tight leading-tight bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent">
+                  Checklist &<br />Delegation
+                </span>
               </Link>
             </div>
             <nav className="flex-1 overflow-y-auto p-2 bg-white">

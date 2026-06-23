@@ -269,6 +269,7 @@ const CalendarPage = () => {
                     name: t.name || t.assigned_person // Fallback for name field
                 })),
 
+                /*
                 ...(maintenanceRes.data || []).map(t => ({
                     ...t,
                     cat: 'MT',
@@ -286,6 +287,7 @@ const CalendarPage = () => {
                     type: 'repair',
                     name: t.assigned_person || t.name || t.filled_by
                 })),
+                */
 
                 ...(delegationRes.data || []).map(t => ({
                     ...t,
@@ -572,8 +574,8 @@ const CalendarPage = () => {
                 <div className="flex flex-wrap items-center justify-center gap-4 py-4 md:justify-start">
                     {[
                         { label: 'Checklist', color: 'bg-blue-600' },
-                        { label: 'Maintenance', color: 'bg-orange-600' },
-                        { label: 'Repair', color: 'bg-red-600' },
+                        // { label: 'Maintenance', color: 'bg-orange-600' },
+                        // { label: 'Repair', color: 'bg-red-600' },
                         { label: 'Delegation', color: 'bg-purple-600' },
                         { label: 'EA', color: 'bg-indigo-600' },
                         { label: 'Holiday', color: 'bg-red-400' }

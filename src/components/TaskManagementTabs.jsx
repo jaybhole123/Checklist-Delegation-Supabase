@@ -16,6 +16,7 @@ export default function TaskManagementTabs({ activeTab, setActiveTab }) {
     ]
 
     const tabs = allTabs.filter(tab => {
+        if (tab.id === "maintenance" || tab.id === "repair") return false;
         if (role === "hod") {
             if (tab.id === "checklist") return true;
             if (tab.id === "repair" && isMachineOperator) return true;
