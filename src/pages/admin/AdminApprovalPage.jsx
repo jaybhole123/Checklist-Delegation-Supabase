@@ -757,10 +757,20 @@ export default function AdminApprovalPage() {
                                                         <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-orange-100 text-orange-800">
                                                             Pending Approval
                                                         </span>
-                                                    ) : (
-                                                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 text-green-800">
-                                                            Approved
-                                                        </span>
+                                                                                    ) : (
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 text-green-800">
+                                                                Approved
+                                                            </span>
+                                                            <button
+                                                                onClick={() => handleReject(task)}
+                                                                disabled={processingId === task.id}
+                                                                className="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-600 border border-red-100 rounded-xl hover:bg-red-100 disabled:opacity-50 transition-all text-xs font-bold"
+                                                            >
+                                                                <XCircle size={12} />
+                                                                Reject
+                                                            </button>
+                                                        </div>
                                                     )
                                                 )}
                                             </td>
@@ -964,10 +974,20 @@ export default function AdminApprovalPage() {
                                             )
                                         ) : (
                                             <div className="text-center">
-                                                {task.rejection_reason ? (
-                                                    <span className="block w-full py-1.5 bg-red-50 text-red-700 text-[10px] font-black uppercase tracking-widest rounded-lg">Rejected: {task.rejection_reason}</span>
+                                                {task.rejection_reason || task.status === 'rejected' ? (
+                                                    <span className="block w-full py-1.5 bg-red-50 text-red-700 text-[10px] font-black uppercase tracking-widest rounded-lg">Rejected: {task.rejection_reason || task.reason}</span>
                                                 ) : (
-                                                    <span className="block w-full py-1.5 bg-green-50 text-green-700 text-[10px] font-black uppercase tracking-widest rounded-lg">Approved ✅</span>
+                                                    <div className="flex w-full items-center justify-between gap-3">
+                                                        <span className="flex-1 py-2 bg-green-50 text-green-700 text-[10px] font-black uppercase tracking-widest rounded-xl text-center">Approved ✅</span>
+                                                        <button
+                                                            onClick={() => handleReject(task)}
+                                                            disabled={processingId === task.id}
+                                                            className="flex items-center justify-center gap-2 py-2 px-4 bg-red-100 text-red-600 rounded-xl text-xs font-black active:scale-95 transition-all"
+                                                        >
+                                                            <XCircle size={14} />
+                                                            Reject
+                                                        </button>
+                                                    </div>
                                                 )}
                                             </div>
                                         )}
