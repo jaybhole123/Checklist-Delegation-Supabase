@@ -284,8 +284,9 @@ function DelegationDataPage() {
     return delegation.filter((task) => {
       const assignedUser = task.name || task.assigned_person || "";
       const userMatch =
-        (userRole || "").toLowerCase() === "admin" ||
-        (assignedUser && assignedUser.toLowerCase() === (username || "").toLowerCase());
+        (userRole || "").trim().toLowerCase() === "admin" ||
+        (username || "").trim().toLowerCase() === "admin" ||
+        (assignedUser && assignedUser.trim().toLowerCase() === (username || "").trim().toLowerCase());
 
       const matchesDoer = doerFilter === "all" || assignedUser === doerFilter;
 
@@ -815,8 +816,9 @@ function DelegationDataPage() {
     const overdueTasks = delegation.filter((task) => {
       const assignedUser = task.name || task.assigned_person || "";
       const userMatch =
-        (userRole || "").toLowerCase() === "admin" ||
-        (assignedUser && assignedUser.toLowerCase() === (username || "").toLowerCase());
+        (userRole || "").trim().toLowerCase() === "admin" ||
+        (username || "").trim().toLowerCase() === "admin" ||
+        (assignedUser && assignedUser.trim().toLowerCase() === (username || "").trim().toLowerCase());
 
       const matchesDoer = doerFilter === "all" || assignedUser === doerFilter;
 

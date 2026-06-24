@@ -157,11 +157,8 @@ export const fetchDelegationDataSortByDate = async () => {
         .eq("reported_by", username);
       const reportingUsers = [username, ...(reports?.map(r => r.user_name) || [])];
       query = query.in('name', reportingUsers);
-    } else if (role === 'admin' && userAccess && userAccess.toLowerCase() !== 'all') {
-      const allowedDepartments = userAccess.split(',').map(dept => dept.trim()).filter(d => d && d.toLowerCase() !== 'all');
-      if (allowedDepartments.length > 0) {
-        query = query.in('department', allowedDepartments);
-      }
+    } else if (role === 'admin') {
+      // Do nothing, fetch all tasks for admin
     }
 
     const { data, error } = await query;
